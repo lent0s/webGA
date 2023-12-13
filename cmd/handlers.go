@@ -23,11 +23,13 @@ func getSettings(w http.ResponseWriter, r *http.Request) {
 	if notSupportedMethod(r.Method, http.MethodPost, w) {
 		return
 	}
-	defer r.Body.Close()
+	defer func() {
+		_ = r.Body.Close()
+	}()
 
 	body, err := getAccountInfo(&r.Body)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusOK)
 		return
 	}
 
@@ -40,11 +42,13 @@ func getStateInstance(w http.ResponseWriter, r *http.Request) {
 	if notSupportedMethod(r.Method, http.MethodPost, w) {
 		return
 	}
-	defer r.Body.Close()
+	defer func() {
+		_ = r.Body.Close()
+	}()
 
 	body, err := getAccountState(&r.Body)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusOK)
 		return
 	}
 
@@ -57,11 +61,13 @@ func sendMessage(w http.ResponseWriter, r *http.Request) {
 	if notSupportedMethod(r.Method, http.MethodPost, w) {
 		return
 	}
-	defer r.Body.Close()
+	defer func() {
+		_ = r.Body.Close()
+	}()
 
 	body, err := sendMessageT(&r.Body)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusOK)
 		return
 	}
 
@@ -74,11 +80,13 @@ func sendFileByUrl(w http.ResponseWriter, r *http.Request) {
 	if notSupportedMethod(r.Method, http.MethodPost, w) {
 		return
 	}
-	defer r.Body.Close()
+	defer func() {
+		_ = r.Body.Close()
+	}()
 
 	body, err := sendFileByUrlT(&r.Body)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusOK)
 		return
 	}
 

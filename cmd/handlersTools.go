@@ -19,7 +19,6 @@ type Page struct {
 	FileNum          string `json:"FileNum"`
 	FPath            string `json:"FPath"`
 	Answer           string `json:"Answer"`
-	ImgLogo          string `json:"ImgLogo"`
 }
 
 func getDefaultPage() *Page {
@@ -33,7 +32,6 @@ func getDefaultPage() *Page {
 		FileNum:          "77771234567",
 		FPath:            "Введите путь к файлу",
 		Answer:           `Введите Ваши [IdInstance]&[ApiTokenInstance]`,
-		//ImgLogo:          ``,
 	}
 }
 
@@ -101,7 +99,6 @@ func runTemplate(p *Page, w http.ResponseWriter) {
 
 	content := []string{
 		`web/sh.page.tmpl`,
-		//`web/favicon.ico`,
 	}
 
 	t := template.Must(template.ParseFiles(content...))
@@ -164,6 +161,10 @@ func getAccountData(body *io.ReadCloser, urlFrag string) ([]byte, error) {
 		return nil, err
 	}
 
+	if err = validInfo(p); err != nil {
+		return nil, err
+	}
+
 	path := fmt.Sprintf(`https://api.green-api.com/waInstance%s/%s/%s`,
 		p.IdInstance, urlFrag, p.ApiTokenInstance)
 
@@ -174,9 +175,12 @@ func getAccountData(body *io.ReadCloser, urlFrag string) ([]byte, error) {
 
 	buf, err = io.ReadAll(res.Body)
 	_ = res.Body.Close()
-	if err != nil || res.StatusCode > 299 {
-		return nil, fmt.Errorf("Response failed with status code: %d and\nbody: %s\n",
-			res.StatusCode, buf)
+
+	if res.StatusCode != http.StatusOK {
+		if buf, err = readErrorAnswer(buf); err != nil {
+			return nil, err
+		}
+		return nil, fmt.Errorf("%s", buf)
 	}
 
 	return buf, nil
@@ -199,6 +203,11 @@ func sendMessageT(body *io.ReadCloser) ([]byte, error) {
 
 	msg := msg{}
 	if err = json.Unmarshal([]byte(send.Msg), &msg); err != nil {
+		msg.ChatId = send.MsgNum + "@c.us"
+		msg.Message = send.Msg
+	}
+
+	if err = validMsg(send, msg); err != nil {
 		return nil, err
 	}
 
@@ -218,6 +227,13 @@ func sendMessageT(body *io.ReadCloser) ([]byte, error) {
 		return nil, err
 	}
 	_ = req.Body.Close()
+
+	if req.StatusCode != http.StatusOK {
+		if buf, err = readErrorAnswer(buf); err != nil {
+			return nil, err
+		}
+		return nil, fmt.Errorf("%s", buf)
+	}
 
 	answer := msgAnswer{}
 	if err = json.Unmarshal(buf, &answer); err != nil {
@@ -253,6 +269,10 @@ func sendFileByUrlT(body *io.ReadCloser) ([]byte, error) {
 		return nil, err
 	}
 
+	if err = validFile(send, prop); err != nil {
+		return nil, err
+	}
+
 	buf, err = json.MarshalIndent(prop, "", "    ")
 	if err != nil {
 		return nil, err
@@ -270,12 +290,34 @@ func sendFileByUrlT(body *io.ReadCloser) ([]byte, error) {
 		return nil, err
 	}
 
+	if req.StatusCode != http.StatusOK {
+		if buf, err = readErrorAnswer(buf); err != nil {
+			return nil, err
+		}
+		return nil, fmt.Errorf("%s", buf)
+	}
+
 	answer := msgAnswer{}
 	if err = json.Unmarshal(buf, &answer); err != nil {
 		return nil, err
 	}
 
 	buf, err = json.MarshalIndent(answer, "", "    ")
+	if err != nil {
+		return nil, err
+	}
+
+	return buf, nil
+}
+
+func readErrorAnswer(buf []byte) ([]byte, error) {
+
+	m := make(map[string]interface{})
+	if err := json.Unmarshal(buf, &m); err != nil {
+		return nil, err
+	}
+
+	buf, err := json.MarshalIndent(m, "", "    ")
 	if err != nil {
 		return nil, err
 	}
