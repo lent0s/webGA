@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+    <head>
+        <meta charset='utf-8'>
+        <meta property="description" content="Лёгкий инструмент для интеграции с Green-Api!">
+
+        <title>{{.HeadTitle}}</title>
+
+        <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAACW1JREFUWEfFl3l0VOUVwO/93nuTmclM1sm+ryQCCVkOkhwiKrEiilrAoFAV9ShVcQEDVq1tWo/0WFTUuoA5lSqKIBDloEUhGEUIEZIGyUoCIQTCZJnJLJmZvJl577tt6GGJLMVTz/H7771373d/373fXR7CL7zwF7YPPxvAkp2pE1fd0NX0Uw90RQCP7U6P0Pj5UiCYgETxgBAMAOy0MUI/ANgIwWsUuq6ruA6Ui0FsO7VGTxg8XgWGJ1x97Y9nPO4clbskQEVNstapsPkMYB4gXAMA2v91OgJ6q2fo2BObykA9X/bF+idjRF3otwlBcamyz00+7nZx4Dc9kvH7uosClO9MKfvPKVcBYOyPjRIAAUEzQzjEgexIYCSEZCScCgjMNmzY5xoxfMg5mQXECI5ULADODo5M0k1KmEjABWY43l3Z0Hpw6aql+0YuACivTvkrAC5DRMrTjlOTtBH8W+8+SVY4H/HRZhXoD6+WdnX8GKy8OrUHABLcslYdcgYLPpnzYTuHq0PSaWJ0FH516qiyu8vOacSxZnqoPu39Puty39udbWMAlu1KKSfClfFSJE0LLCCTFEQ1uIPJIAMSf/TB3LZ3LhWG8uqUIQAM9SlaZZxtHJuB0XTU0atMS79RGg20VWL05693457hHt5sH/zd1oJk29RQ/cmzAOVfpUWCQN0RYmjAjMBiipRCycxOYD3sF4hg5aLcluWXuwPl1SkWAAx3e8OVcc4Y9oA7SEV1hHUkZUEYCBjtcClCTLaoBgSyhTVb2jZ8uSUHvgHlLMBTO1MeMwi61+4LvQ1O+hX6XuqiVMEq9CkDnHE5fFFhl+NyAMt2ZfRhQIYp32aiWfZApKFuYX1+sVppkAQ9E2C7lfslMCAYwvc1WQZ+m//pGwWgCp+dA6hOWYOAD+1zx6stvmiYkJYHJdJRHmrd27f82rbEyxlfUnuHTkP+AWQ6Q55Tz6fbDaQbOMK7gkKEz+Li6XoxiOcdPYxCXC6ysFi7KArZkNdq7dvQuPRcCKpTXhcYe7TamUgOIRkeyc6jAAZsoKVJ/tNTXyRDxynLpSCerr1zPiJ+5PP7uWvYS8txEsTb7ECyg4iAPEFRzGmIhARTAgOEZhHZLVhYNnppz9WBdxqvWmD2az948Wgmi9fK6vTYbJoTZwJ+yoK3LvzHDmo1zzwDQATY3r4izO0OdxYWLvLnP5xfknl70i6y9knRsRN4ZFwODA60wj1WHST7BNwZEsBfGuyHeMthnpTus8qqugtFvuzdGQ3msx5Ye2xSiHkITvR5DToFEqHfJ6g1FhLfys2AiiVV1Nk1uIS3nvrbKER7+0tGn46LOUnP2Eaf8+bnlWYsiN+ucduZKBmgYPJC7HBZVJfjKAtQ3MylCVPMHol9vW4DCzUIZArRUHYye2/rvY0PjknDyqar/uhUwp4nlggoxvFAMYiFChyV4w54YOkm9PrV75GoAxC7594wsaQkP7XB6nAHv1d1oHThC9NihrlF4xp2ckEwYta4qdim6MnhMqOCGt7fb8Mftm9zp8dLtYyBnJel/VPlzQcOjgF4tm5OTowxuEaU0sMQESREmhQokJYhO9Rm5i+sqob2zsH/9oDzVnZmJF/x6iy1ZXgAHW476UROYRouCpG3g8JFyO6so402H1+7fZeYnRljnlOScKQwNmb1rYkrPx4DsHzPrUYE47oRt++W3LQCW5ZOCAsRcYzBts4B3nDoJJgHhlESGWRnRMJ1U9Opl2wkKyPYa+vGTwaNHyw2uDRZ/uC5KbIGdRGpbHXrEXj9+GGKDDdW3phvasuNjhKZwDeNAXh677zb3B7P5qEhO07JKkq+ITpyPCd4FAB+BQgBl0tFOx9RLcow1ln6+ee+VEdLV9ubtenp+21+/5Y4jV5T29PHt7hPYoRJt3v9TZ9cf2avswAVNdeKLiGqS5RYo+z1bn7t2qp1Z4R+6FsZKBCfjAIbj8TiCSgUiCQAGOYAA65hXz8ItLqNuWGt3Yg67qFdhztZSbC+LBbcbwJAVG/DoK/MEdNeX6J89LaibFSIHhQQV58DqJ+lb6z39Pf2Op6fPjONjTiVsDdu3FIBcPH+PsYb42NmfFy1eNu7ssAk7sZU+Qiv7CbhNzEhmyYEqLObHE42ezhcTd2hR6PRKBuixFm6lHrRUPbpzvNDwGJvGfdp8bSka7wu5ZvW1v6SY802TkDHAWEQAc1A1MURLAwwBgh0gBRHAHkImH1gxxPqQWcHtnp8UNnlY24V8e7osDUPJQTNdypKoKlfsy2jM6NUitToyAuzA+9YsPWCgaR14OUXiOARAAjb39ijPrviS+wfdI2Wq1HQiw8vBDw8TE9fb14kHPJ6lVeswDq62rhEwCqSY7ZODpX2ENIrjHjRxN4cVRMozBGPCc9hWdnpoQVnf1ScVLWg9vih438JZVppEAGEM+6VZYWqtjfxr2o6oPmwmXxeLgAQnYZBJF2ACJMmxsHD9xZBamYQdnkV/p0DaHdfP04JFPld0UYwiOxtAPIXpb20HBFGdccsvGt9UdbH8/e1j75tGVh5HxFWnoEYUWQYkC2QZIgHzomG7B4akf3EEEGvkzA0RI89sp8f88gUIALWWS1Y71AwUyPy+ZF6kknFRJ1mtIA9887+vf/ceE9t88ZDc0oVkBsW5Hxxuorigg+vDvIzdvNwyGDV9plHvK39K0sB8X0iiB2dvfxcAQ0bvfAAI5y4lwMGi4geTnzIz7nT74dt/UNwzCMLAhEVBwZAuk4EO/hO6xQZ9Sc2tDR83u92zQXmL914Z33z+S44Hde71heYVJIWA0OGBL2RRqP11xOKbzJqA+cKAAZ1tKOpqnrCq2LniE/wK346KXvhpMeLAQwoVkA+2+PBouAYAJ2BDWj81C04mYh4oK678+Vuj3mtUY8dvTb+1Cfzvq+5AOBSBab+1MsmrQD3I9A8h8JzhnyKIHNOEkPQMwbIVVIUsqf2mb3JbHwEJo5nJEkIfpf6L/mbJ/cO7am2jSh/12nRAMCXPjdlrPELsuBSIIMH52VaTLlWVZTuRoYRpJLW7vN59Rrhu4Chnu9SOtUjUsSUCDBFAZnCESWxSgoqmLui7uqZQGj1Sf6misIGz8X2v6Ifk0uBvXHw9sn3O6+S0dLXKGrSAGPTOcUnrtNESIsRCy9q8IIsuFx9v5Jv1PdDoM92sJxpo72iybQVjQVtV6J3QS/4KUo/p+z/FYKfA+TfK4RypGiWlmkAAAAASUVORK5CYII=">
+        <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,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">
+
+        <style>
+            body {
+                min-width: 385pt;
+                max-width: 700pt;
+                margin: auto;
+                font: 12pt Calibri, sans-serif;
+                background-color: darkslategrey;
+            }
+            h1 {
+                font-size: 40pt;
+                color: #0a510c;
+            }
+            h2 {
+                padding: 0 10pt 0 10pt;
+            }
+
+            #avatar {
+                height: 85pt;
+                margin-bottom: -40pt;
+                padding: 0 20pt 0 20pt;
+            }
+            #header {
+                display: flex;
+                align-items: center;
+                background: linear-gradient(to right, #0c6e0f, #4cae4f);
+            }
+            #main {
+                overflow: hidden;
+                background: #e7e7e7;
+                padding: 5pt;
+            }
+            #request {
+                float: left;
+                width: 180pt;
+                padding: 5pt 5pt 5pt 5pt;
+            }
+            #response {
+                padding: 0 5pt 0 5pt;
+            }
+            #answerTitle {
+                display: flex;
+                align-items: center;
+                justify-content: space-between
+            }
+            #answer {
+                height: 339pt;
+                padding: 5pt;
+                border: 2pt solid #333;
+                border-radius: 15pt 15pt 0 15pt;
+                text-align: justify;
+                overflow: auto;
+                white-space: pre;
+                text-wrap: nowrap;
+            }
+
+            input, button {
+                border: 2pt solid #000000;
+            }
+            input {
+                height: 12pt;
+                width: 148pt;
+                padding-inline: 10pt;
+                margin-top: 5pt;
+            }
+            button {
+                cursor: pointer;
+            }
+            input:focus, button:focus {
+                background-color: #c5ffca;
+            }
+
+            .button_get, .button_send {
+                height: 30pt;
+                width: 130pt;
+                margin-top: 5pt;
+            }
+            .button_get {
+                border-radius: 6pt;
+                margin-left: 19pt;
+            }
+            .button_send {
+                border-radius: 0 0 15pt 0;
+            }
+            .button_clear {
+                margin: 0 0 5pt 5pt;
+                width: 60pt;
+                height: 20pt;
+                border-radius: 10pt;
+            }
+            .button_clear:focus {
+                background-color: #c5ffca;
+                margin: 0 0 5pt 255pt;
+                width: 60pt;
+                height: 20pt;
+                border-radius: 10pt;
+            }
+        </style>
+
+        <script>
+             function getSettings() {
+                var xhr = new XMLHttpRequest();
+                var data = {
+                    IdInstance: document.getElementById("IdInstance").value,
+                    ApiTokenInstance: document.getElementById("ApiTokenInstance").value,
+                };
+                xhr.open("POST", "/getSettings", true);
+                xhr.setRequestHeader('Content-type', 'application/json');
+
+                xhr.onreadystatechange=function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var answer = document.getElementById("answer");
+                        answer.innerHTML = xhr.responseText;
+                    }
+                };
+
+                xhr.send(JSON.stringify(data));
+             }
+             function getStateInstance() {
+                var xhr = new XMLHttpRequest();
+                var data = {
+                    IdInstance: document.getElementById("IdInstance").value,
+                    ApiTokenInstance: document.getElementById("ApiTokenInstance").value,
+                };
+                xhr.open("POST", "/getStateInstance", true);
+                xhr.setRequestHeader('Content-type', 'application/json');
+
+                 xhr.onreadystatechange=function() {
+                     if (xhr.readyState === 4 && xhr.status === 200) {
+                         var answer = document.getElementById("answer");
+                         answer.innerHTML = xhr.responseText;
+                     }
+                 };
+
+                 xhr.send(JSON.stringify(data));
+             }
+             function sendMessage() {
+                var xhr = new XMLHttpRequest();
+                var data = {
+                    IdInstance: document.getElementById("IdInstance").value,
+                    ApiTokenInstance: document.getElementById("ApiTokenInstance").value,
+                    MsgNum: document.getElementById("MsgNum").value,
+                    Msg: document.getElementById("Msg").value,
+                };
+                xhr.open("POST", "/sendMessage", true);
+                xhr.setRequestHeader('Content-type', 'application/json');
+
+                 xhr.onreadystatechange=function() {
+                     if (xhr.readyState === 4 && xhr.status === 200) {
+                         var answer = document.getElementById("answer");
+                         answer.innerHTML = xhr.responseText;
+                     }
+                 };
+
+                 xhr.send(JSON.stringify(data));
+             }
+             function sendFileByUrl() {
+                var xhr = new XMLHttpRequest();
+                var data = {
+                    IdInstance: document.getElementById("IdInstance").value,
+                    ApiTokenInstance: document.getElementById("ApiTokenInstance").value,
+                    FileNum: document.getElementById("FileNum").value,
+                    FPath: document.getElementById("FPath").value,
+                };
+                xhr.open("POST", "/sendFileByUrl", true);
+                xhr.setRequestHeader('Content-type', 'application/json');
+
+                 xhr.onreadystatechange=function() {
+                     if (xhr.readyState === 4 && xhr.status === 200) {
+                         var answer = document.getElementById("answer");
+                         answer.innerHTML = xhr.responseText;
+                     }
+                 };
+
+                 xhr.send(JSON.stringify(data));
+             }
+        </script>
+    </head>
+
+    <body>
+        <div id="header">
+            <img id="avatar"
+                 src="data:image/png;base64,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"
+                 alt="g-logo">
+            <h1>{{.HeadTitle}}</h1>
+        </div>
+
+        <div id="main">
+            <div id="request">
+                <div><input id="IdInstance" type="text" title="Введите Ваш IdInstance" value="Введите Ваш IdInstance" name="IdInstance" autocomplete="on"
+                            onkeypress="if(this.value.length&gt;9) return false" min="1000000000" max="9999999999"
+                            style=            "border-radius: 6pt"
+                            onfocusout="style='border-radius: 6pt'"
+                            onfocusin= "style='border-radius: 6pt; font-variant-numeric: oldstyle-nums'; this.type='number'"></div>
+
+                <div><input id="ApiTokenInstance" type="text" title="Введите Ваш ApiTokenInstance" value="Введите Ваш ApiTokenInstance" name="ApiTokenInstance" autocomplete="on"
+                                minlength="50" maxlength="50"
+                            onclick="if(this.value==='Введите Ваш ApiTokenInstance') return this.value=''"
+                            style=            "border-radius: 6pt"
+                            onfocusout="style='border-radius: 6pt'"
+                            onfocusin= "style='border-radius: 6pt'"></div>
+
+                <div><button type="submit" title="Получить информацию о настройках аккаунта Instance" required placeholder="IdInstance" class="button_get"
+                             onclick="getSettings()"
+                             onfocusout="">getSettings</button></div>
+
+                <div><button type="submit" title="Получить информацию о состоянии аккаунта Instance" class="button_get"
+                             onclick="getStateInstance()"
+                             onfocusout="">getStateInstance</button></div>
+
+                <div><input id="MsgNum" type="text" title="Введите номер телефона получателя одним числом. Например, для номера +7(7701)234567 введите 77701234567"
+                            value="Введите номер получателя" name="MsgNum" autocomplete="on"
+                            onkeypress="if(this.value.length&gt;21) return false" max="9999999999999999999999"
+                            style=            "border-radius: 15pt 15pt 0 0; margin-top: 30pt"
+                            onfocusout="style='border-radius: 15pt 15pt 0 0; margin-top: 30pt'"
+                            onfocusin= "style='border-radius: 15pt 15pt 0 0; margin-top: 30pt; font-variant-numeric: oldstyle-nums'; this.type='number'"></div>
+                <div><textarea id="Msg" title="Введите в это поле Ваше сообщение"
+                               onclick="if(this.innerText==='') return this.innerText=''"
+                               style=            "border: 2pt solid #000000; resize: none; margin: 5pt 0 -3pt 0; width: 165pt; height: 90pt; text-align: justify; border-radius: 0 0 15pt 0"
+                               onfocusout="style='border: 2pt solid #000000; resize: none; margin: 5pt 0 -3pt 0; width: 165pt; height: 90pt; text-align: justify; border-radius: 0 0 15pt 0'"
+                               onfocusin= "style='border: 2pt solid #000000; resize: none; margin: 5pt 0 -3pt 0; width: 165pt; height: 90pt; text-align: justify; border-radius: 0 0 15pt 0; background-color: #c5ffca'"
+                               name="Msg">Введите текст сообщения</textarea></div>
+                <div><button type="submit" title="Отправить сообщение" class="button_send"
+                             onclick="sendMessage()"
+                             onfocusout="">sendMessage</button></div>
+
+                <div><input id="FileNum" type="text" title="Введите номер телефона получателя одним числом. Например, для номера +7(7701)234567 введите 77701234567"
+                            value="Введите номер получателя" name="FileNum" autocomplete="on"
+                            onkeypress="if(this.value.length&gt;21) return false" max="9999999999999999999999"
+                            style=            "border-radius: 15pt 15pt 0 0; margin-top: 30pt"
+                            onfocusout="style='border-radius: 15pt 15pt 0 0; margin-top: 30pt'"
+                            onfocusin ="style='border-radius: 15pt 15pt 0 0; margin-top: 30pt; font-variant-numeric: oldstyle-nums'; this.type='number'"></div>
+                <div><input id="FPath" type="text" title="Введите URL-адрес файла для отправки" value="Укажите URL файла" name="FPath"
+                            onclick="if(this.value==='Укажите URL файла') return this.value=''"
+                            style=            "border-radius: 0 0 15pt 0"
+                            onfocusout="style='border-radius: 0 0 15pt 0'"
+                            onfocusin= "style='border-radius: 0 0 15pt 0'"></div>
+                <div><button type="submit" title="Отправить файл" class="button_send"
+                             onclick="sendFileByUrl()"
+                             onfocusout="">sendFileByUrl</button></div>
+            </div>
+
+            <div id="response">
+                <div id="answerTitle">
+                    <h2>Ответ:</h2>
+                    <button type="submit" title="Очистить Ответ" class="button_clear"
+                            onclick="document.getElementById('answer').innerText=''">Очистить</button>
+                </div>
+
+                <code><div id="answer">Введите свои IdInstance и ApiTokenInstance и выберите действие</div></code>
+            </div>
+        </div>
+
+    </body>
+</html>
