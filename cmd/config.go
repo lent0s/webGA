@@ -1,16 +1,16 @@
 package cmd
 
 import (
-	"log"
+	"github.com/lent0s/webGA/logger"
 	"os"
 )
 
-func getHost() string {
+func getHost(logs *logger.Logs) string {
 
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "9012"
-		log.Printf("$PORT must be set- Using default: %s\n", port)
+		logs.Log2Way.Info().Msgf("$PORT must be set - using default: %s", port)
 	}
 
 	return ":" + port

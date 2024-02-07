@@ -1,12 +1,13 @@
 package cmd
 
 import (
+	"github.com/lent0s/webGA/handlers"
 	"net/http"
 )
 
 func (p *Page) home(w http.ResponseWriter, r *http.Request) {
 
-	if notSupportedMethod(r.Method, http.MethodGet, w) {
+	if handlers.NotSupportedMethod(r.Method, http.MethodGet, w) {
 		return
 	}
 
@@ -20,7 +21,7 @@ func (p *Page) home(w http.ResponseWriter, r *http.Request) {
 
 func getSettings(w http.ResponseWriter, r *http.Request) {
 
-	if notSupportedMethod(r.Method, http.MethodPost, w) {
+	if handlers.NotSupportedMethod(r.Method, http.MethodPost, w) {
 		return
 	}
 	defer func() {
@@ -39,7 +40,7 @@ func getSettings(w http.ResponseWriter, r *http.Request) {
 
 func getStateInstance(w http.ResponseWriter, r *http.Request) {
 
-	if notSupportedMethod(r.Method, http.MethodPost, w) {
+	if handlers.NotSupportedMethod(r.Method, http.MethodPost, w) {
 		return
 	}
 	defer func() {
@@ -58,7 +59,7 @@ func getStateInstance(w http.ResponseWriter, r *http.Request) {
 
 func sendMessage(w http.ResponseWriter, r *http.Request) {
 
-	if notSupportedMethod(r.Method, http.MethodPost, w) {
+	if handlers.NotSupportedMethod(r.Method, http.MethodPost, w) {
 		return
 	}
 	defer func() {
@@ -77,7 +78,7 @@ func sendMessage(w http.ResponseWriter, r *http.Request) {
 
 func sendFileByUrl(w http.ResponseWriter, r *http.Request) {
 
-	if notSupportedMethod(r.Method, http.MethodPost, w) {
+	if handlers.NotSupportedMethod(r.Method, http.MethodPost, w) {
 		return
 	}
 	defer func() {

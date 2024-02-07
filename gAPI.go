@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/lent0s/webGA/cmd"
+	"github.com/lent0s/webGA/logger"
 	"os"
 	"os/signal"
 	"sync"
@@ -19,9 +20,12 @@ func main() {
 
 	wg := sync.WaitGroup{}
 	wg.Add(1)
-	cmd.ServerUp(exit, &wg)
+
+	logs := logger.InitLogger()
+	cmd.ServerUp(exit, &wg, logs)
 
 	wg.Wait()
+	logger.StopLogger(logs)
 }
 
 func waitExit(exitSignal chan os.Signal, exit chan struct{}) {
